@@ -1,8 +1,9 @@
 @echo off
-echo Choose an application to launch:
-echo 1. Launch App Full
-echo 2. Launch App Desk
-set /p choice=Enter your choice (1=full 2=desk): 
+powershell -ExecutionPolicy Bypass -File "%~dp0popup.ps1"
+
+:: Read the user choice from a temp file
+for /f %%A in ('type "%temp%\choice.txt"') do set choice=%%A
+del "%temp%\choice.txt"
 
 if "%choice%"=="1" (
     start "" "C:\ffmpeg\playnite splash.bat"
@@ -11,3 +12,4 @@ if "%choice%"=="1" (
 ) else (
     echo Invalid choice. Exiting.
 )
+exit
